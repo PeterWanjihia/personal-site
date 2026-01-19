@@ -1,0 +1,9 @@
+[
+  {
+    "id": "docker-clone",
+    "title": "C-Docker",
+    "lang": "C",
+    "status": "Beta",
+    "description": "A minimal container engine using Linux namespaces and cgroups."
+  }
+]

@@ -1,0 +1,25 @@
+{
+    "posts": [
+        {
+            "metadata": {
+                "title": "Building the Kernel",
+                "date": "2026-01-19",
+                "tags": [
+                    "systems",
+                    "C"
+                ]
+            },
+            "content": "<p>This is the first log entry. Systems development is about control.</p>\n",
+            "slug": "hello-world"
+        }
+    ],
+    "projects": [
+        {
+            "id": "docker-clone",
+            "title": "C-Docker",
+            "lang": "C",
+            "status": "Beta",
+            "description": "A minimal container engine using Linux namespaces and cgroups."
+        }
+    ]
+}
