@@ -1,12 +1,20 @@
-# Define the python inside the virtual env
 PY = ./venv/bin/python3
 
+# Compiles and then restarts the server
+all: build restart
+
 build:
-	@echo "Compiling System State..."
+	@echo "[COMPILER] Syncing System State..."
 	$(PY) compiler.py
 
+# Kills any existing node process and starts a fresh one
+restart:
+	@echo "[KERNEL] Re-booting..."
+	-pkill -f "node server.js"
+	node server.js & 
+
 run:
-	@echo "Booting Kernel (Node.js Server)..."
+	@echo "[KERNEL] Booting in foreground..."
 	node server.js
 
 clean:

@@ -27,3 +27,28 @@ li:hover { text-decoration: underline; }
 
 .card { border: 1px solid var(--border); padding: 15px; margin-bottom: 20px; }
 .card:hover { border-color: var(--fg); }
+
+/* Styling for Compiled Markdown Content */
+.post-content h1, .post-content h2 {
+    border-bottom: 1px solid var(--border);
+    padding-top: 20px;
+}
+
+.post-content p {
+    line-height: 1.6;
+    color: #ccc; /* Slightly dimmer for body text */
+}
+
+.post-content code {
+    background: #1a1a1a;
+    padding: 2px 5px;
+    border-radius: 3px;
+    color: #ffb86c; /* Contrast color for code */
+}
+
+.post-content pre {
+    background: #1a1a1a;
+    padding: 15px;
+    border-left: 3px solid var(--fg);
+    overflow-x: auto;
+}

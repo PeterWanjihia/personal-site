@@ -1,13 +1,29 @@
 let systemState = null;
 
 async function boot() {
-    const res = await fetch('/api/state');
-    systemState = await res.json();
-    renderHome();
-    
-    document.getElementById('session-id').innerText = Math.random().toString(16).substr(2, 8).toUpperCase();
+    try {
+        console.log("[SHELL] Initiating system boot...");
+        const res = await fetch('/api/state');
+        
+        if (!res.ok) throw new Error(`Kernel returned status: ${res.status}`);
+        
+        systemState = await res.json();
+        console.log("[SHELL] System state loaded successfully.");
+        
+        renderHome();
+        
+        document.getElementById('session-id').innerText = 
+            Math.random().toString(16).substr(2, 8).toUpperCase();
+            
+    } catch (err) {
+        console.error("[SHELL] Boot failed:", err);
+        document.getElementById('view-port').innerHTML = `
+            <h1 style="color: red;">SYSTEM_HALT: BOOT_FAILURE</h1>
+            <p>Error: ${err.message}</p>
+            <p>Check terminal for Kernel status and run 'make build'.</p>
+        `;
+    }
 }
-
 // Module: View Router - Home
 function renderHome() {
     const main = document.getElementById('view-port');
