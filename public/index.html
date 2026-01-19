@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>SYS_ROOT@PETER</title>
+</head>
+<body>
+    <header>
+        <div>PETER_OS v1.0.0</div>
+        <div id="clock"></div>
+    </header>
+
+    <nav>
+        <ul>
+            <li onclick="renderHome()">~/home</li>
+            <li onclick="renderProjects()">/bin/projects</li>
+            <li onclick="renderBlog()">/var/log/posts</li>
+        </ul>
+    </nav>
+
+    <main id="view-port">
+        </main>
+
+    <footer>
+        SESSION_ID: <span id="session-id"></span> | STATUS: STABLE
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
