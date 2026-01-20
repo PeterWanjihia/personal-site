@@ -89,29 +89,66 @@ function renderProjects() {
 function renderAbout() {
     const main = document.getElementById('view-port');
     main.innerHTML = `
-        <div class="man-page">
-            <div class="man-header">PETER(1) &nbsp;&nbsp;&nbsp;&nbsp; User Manual &nbsp;&nbsp;&nbsp;&nbsp; PETER(1)</div>
-            
-            <h3>NAME</h3>
-            <p><strong>Peter</strong> -- Systems Developer, Blockchain Architect, and Computer Science Undergraduate at JKUAT.</p>
+        <div class="cv-container">
+            <section class="cv-header">
+                <div class="profile-frame">
+                    <div class="img-placeholder">IMAGE_PENDING_UPLOAD</div>
+                </div>
+                <div class="profile-text">
+                    <h1>PETER_NDUATI</h1>
+                    <p class="role-title">Systems Architect & Blockchain Engineer</p>
+                    <p class="dim">LOC: Juja, Kenya | TZ: UTC+3</p>
+                </div>
+            </section>
 
-            <h3>SYNOPSIS</h3>
-            <p><strong>peter</strong> [--focus blockchain] [--focus systems-dev] [--age 24]</p>
+            <section class="cv-section">
+                <h2 class="section-tag">// SYNOPSIS</h2>
+                <p class="bio-text">
+                    Dedicated to building high-performance systems from first principles. 
+                    Specializing in low-level memory management (C/Rust) and distributed 
+                    state machines (Blockchain/MEV). Currently optimizing the 2026 play.
+                </p>
+            </section>
 
-            <h3>DESCRIPTION</h3>
-            <p>As a CS student at Jomo Kenyatta University of Agriculture and Technology, Peter focuses on building high-performance systems from first principles. Currently serving as a GDSC executive with a blockchain focus.</p>
-            
-            <h3>SKILLS</h3>
-            <ul>
-                <li><strong>Languages:</strong> C, C++, Python, JavaScript (Node.js)</li>
-                <li><strong>Domains:</strong> DeFi Automation, MEV, Kernel Architecture, AI Agents</li>
-                <li><strong>Interests:</strong> Stoicism, Austrian Economics, Guitar</li>
-            </ul>
+            <section class="cv-section">
+                <h2 class="section-tag">// STACK_DUMP</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>SYSTEMS</h3>
+                        <ul><li>C/C++</li><li>Rust</li><li>Go</li><li>Linux Kernel</li></ul>
+                    </div>
+                    <div class="skill-category">
+                        <h3>WEB3</h3>
+                        <ul><li>EVM Mechanics</li><li>MEV Extraction</li><li>Solidity</li></ul>
+                    </div>
+                    <div class="skill-category">
+                        <h3>INFRA</h3>
+                        <ul><li>Docker (from scratch)</li><li>Git (from scratch)</li><li>Node.js</li></ul>
+                    </div>
+                </div>
+            </section>
 
-            <h3>SEE ALSO</h3>
-            <p><a href="#" onclick="renderProjects()">projects(1)</a>, <a href="#" onclick="renderBlog()">blog(1)</a></p>
-            
-            <div class="man-footer">PETER 1.0.0 &nbsp;&nbsp;&nbsp;&nbsp; 2026-01-19</div>
+            <section class="cv-section">
+                <h2 class="section-tag">// MISSION_HISTORY</h2>
+                <div class="timeline-item">
+                    <div class="time-label">2025-2026</div>
+                    <div class="time-content">
+                        <strong>GDSC JKUAT - Executive Member</strong>
+                        <p>Leading blockchain initiatives and technical workshops for 500+ students.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="time-label">2026-PRESENT</div>
+                    <div class="time-content">
+                        <strong>Full-Stack Portfolio System</strong>
+                        <p>Architecting a modular pre-compiled SSG pipeline using Python and Node.js.</p>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="cv-footer">
+                [ End of Manual ] - Press Ctrl+K to Navigate
+            </footer>
         </div>
     `;
 }
@@ -120,7 +157,7 @@ function renderAbout() {
 const commands = [
     { cmd: 'ls /bin', action: renderProjects, desc: 'List all project executables' },
     { cmd: 'ls /var/log', action: renderBlog, desc: 'List all system logs' },
-    { cmd: 'man peter', action: renderAbout, desc: 'Open user manual' },
+    { cmd: 'man peter', action: renderAbout, desc: 'Open user manual (CV)' },
     { cmd: 'cd ~', action: renderHome, desc: 'Return to home directory' }
 ];
 
@@ -186,5 +223,13 @@ async function updateTelemetry() {
 }
 // Run telemetry every second
 setInterval(updateTelemetry, 1000);
+
+async function updateHealth() {
+    const res = await fetch('/api/sys-health');
+    const health = await res.json();
+    document.getElementById('status-bar').innerHTML = 
+        `UPTIME: ${Math.floor(health.uptime)}s | MEM: ${(health.memory / 1024 / 1024).toFixed(2)}MB | LAST_BUILD: ${new Date(health.last_build).toLocaleTimeString()}`;
+}
+setInterval(updateHealth, 5000); // Poll every 5 seconds
 
 boot();

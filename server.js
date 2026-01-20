@@ -17,6 +17,16 @@ app.get('/api/state', (req, res) => {
     }
 });
 
+app.get('/api/sys-health', (req, res) => {
+    const stats = fs.statSync('./sys_data.json');
+    res.json({
+        uptime: process.uptime(),
+        memory: process.memoryUsage().heapUsed,
+        last_build: stats.mtime,
+        version: "1.0.4-stable"
+    });
+});
+
 app.listen(PORT, () => {
     console.log(`\x1b[32m[KERNEL]\x1b[0m System online at http://localhost:${PORT}`);
 });
