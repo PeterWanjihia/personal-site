@@ -186,3 +186,39 @@ li:hover { text-decoration: underline; }
     color: var(--dim);
     font-size: 0.8rem;
 }
+
+@media print {
+    body * { visibility: hidden; }
+    .cv-container, .cv-container * { visibility: visible; }
+    .cv-container {
+        position: absolute; left: 0; top: 0;
+        width: 100%; color: #000; background: #fff;
+        padding: 0;
+    }
+    .section-tag { background: #000; color: #fff; border: none; }
+    .btn-primary, header, nav, footer { display: none !important; }
+    .cv-header { border-bottom: 2px solid #000; }
+}
+
+/* Screen Styling for the Grid */
+.grid-layout {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 40px;
+}
+
+.interest-cloud .tag {
+    border: 1px solid var(--dim);
+    padding: 2px 8px;
+    font-size: 0.8rem;
+    display: inline-block;
+    margin: 5px;
+}
+
+.spec-item {
+    background: #111;
+    border-left: 3px solid var(--fg);
+    padding: 10px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}

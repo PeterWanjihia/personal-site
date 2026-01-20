@@ -1,26 +1,29 @@
 {
     "identity": {
         "name": "PETER_NDUATI",
-        "role": "Systems Architect & Blockchain Engineer",
+        "role": "Systems Architect & Backend Engineer",
         "location": "Juja, Kenya | JKUAT",
-        "synopsis": "Dedicated to building high-performance systems from first principles. Focusing on low-level memory management and the 2026 play.",
+        "github": "https://github.com/PeterWanjihia",
+        "synopsis": "Focused on the intersection of low-level systems and automated markets. Engineering high-performance backends and predictive agents from first principles.",
         "image_url": "placeholder"
     },
+    "specialties": ["C", "Node.js", "Go", "DSA"],
+    "interests": ["AI Agents", "Geopolitics", "Polymarket Automation", "Austrian Economics"],
     "skills": {
-        "SYSTEMS": ["C/C++", "Rust", "Go (Learning)", "Linux Kernel"],
-        "WEB3": ["EVM Mechanics", "MEV Extraction", "Solidity Architecture"],
-        "INFRA": ["Docker (from scratch)", "Git (from scratch)", "Node.js"]
+        "SYSTEMS": ["C (Memory Management)", "Go (Concurrency/Channels)", "DSA", "Linux Namespaces"],
+        "ENGINEERING": ["Node.js Runtime", "API Architecture", "Docker (from scratch)", "Git Internals"],
+        "AUTOMATION": ["EVM Mechanics", "Polymarket Bot Architecture", "Predictive Modeling"]
     },
     "history": [
         {
-            "period": "2026-PRESENT",
-            "title": "Full-Stack Portfolio System",
-            "desc": "Architecting a modular pre-compiled SSG pipeline using Python and Node.js."
+            "period": "2023-2027",
+            "title": "BSc. Computer Science - JKUAT",
+            "desc": "Focusing on Distributed Systems, Advanced Calculus, and Software Engineering Models."
         },
         {
             "period": "2025-2026",
             "title": "GDSC JKUAT - Executive Member",
-            "desc": "Leading blockchain initiatives and technical workshops for 500+ students."
+            "desc": "Pioneering blockchain workshops and systems-level mentorship for the developer community."
         }
     ]
 }
