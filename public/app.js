@@ -88,69 +88,55 @@ function renderProjects() {
 // Module: View Router - Man Page (About)
 function renderAbout() {
     const main = document.getElementById('view-port');
+    const id = systemState.identity;
+
     main.innerHTML = `
         <div class="cv-container">
             <section class="cv-header">
                 <div class="profile-frame">
-                    <div class="img-placeholder">IMAGE_PENDING_UPLOAD</div>
+                    ${id.identity.image_url === 'placeholder' ? 
+                      '<div class="img-placeholder">IMAGE_PENDING_UPLOAD</div>' : 
+                      `<img src="${id.identity.image_url}" style="width:100%; height:100%; object-fit:cover;">`}
                 </div>
                 <div class="profile-text">
-                    <h1>PETER_NDUATI</h1>
-                    <p class="role-title">Systems Architect & Blockchain Engineer</p>
-                    <p class="dim">LOC: Juja, Kenya | TZ: UTC+3</p>
+                    <h1>${id.identity.name}</h1>
+                    <p class="role-title">${id.identity.role}</p>
+                    <p class="dim">${id.identity.location}</p>
                 </div>
             </section>
 
             <section class="cv-section">
                 <h2 class="section-tag">// SYNOPSIS</h2>
-                <p class="bio-text">
-                    Dedicated to building high-performance systems from first principles. 
-                    Specializing in low-level memory management (C/Rust) and distributed 
-                    state machines (Blockchain/MEV). Currently optimizing the 2026 play.
-                </p>
+                <p class="bio-text">${id.identity.synopsis}</p>
             </section>
 
             <section class="cv-section">
                 <h2 class="section-tag">// STACK_DUMP</h2>
                 <div class="skills-grid">
-                    <div class="skill-category">
-                        <h3>SYSTEMS</h3>
-                        <ul><li>C/C++</li><li>Rust</li><li>Go</li><li>Linux Kernel</li></ul>
-                    </div>
-                    <div class="skill-category">
-                        <h3>WEB3</h3>
-                        <ul><li>EVM Mechanics</li><li>MEV Extraction</li><li>Solidity</li></ul>
-                    </div>
-                    <div class="skill-category">
-                        <h3>INFRA</h3>
-                        <ul><li>Docker (from scratch)</li><li>Git (from scratch)</li><li>Node.js</li></ul>
-                    </div>
+                    ${Object.entries(id.skills).map(([category, list]) => `
+                        <div class="skill-category">
+                            <h3>${category}</h3>
+                            <ul>${list.map(s => `<li>${s}</li>`).join('')}</ul>
+                        </div>
+                    `).join('')}
                 </div>
             </section>
 
             <section class="cv-section">
                 <h2 class="section-tag">// MISSION_HISTORY</h2>
-                <div class="timeline-item">
-                    <div class="time-label">2025-2026</div>
-                    <div class="time-content">
-                        <strong>GDSC JKUAT - Executive Member</strong>
-                        <p>Leading blockchain initiatives and technical workshops for 500+ students.</p>
+                ${id.history.map(item => `
+                    <div class="timeline-item">
+                        <div class="time-label">${item.period}</div>
+                        <div class="time-content">
+                            <strong>${item.title}</strong>
+                            <p>${item.desc}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="time-label">2026-PRESENT</div>
-                    <div class="time-content">
-                        <strong>Full-Stack Portfolio System</strong>
-                        <p>Architecting a modular pre-compiled SSG pipeline using Python and Node.js.</p>
-                    </div>
-                </div>
+                `).join('')}
             </section>
-
-            <footer class="cv-footer">
-                [ End of Manual ] - Press Ctrl+K to Navigate
-            </footer>
         </div>
     `;
+    main.scrollTop = 0;
 }
 
 // Add this to your global state

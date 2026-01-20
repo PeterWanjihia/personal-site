@@ -1,0 +1,26 @@
+{
+    "identity": {
+        "name": "PETER_NDUATI",
+        "role": "Systems Architect & Blockchain Engineer",
+        "location": "Juja, Kenya | JKUAT",
+        "synopsis": "Dedicated to building high-performance systems from first principles. Focusing on low-level memory management and the 2026 play.",
+        "image_url": "placeholder"
+    },
+    "skills": {
+        "SYSTEMS": ["C/C++", "Rust", "Go (Learning)", "Linux Kernel"],
+        "WEB3": ["EVM Mechanics", "MEV Extraction", "Solidity Architecture"],
+        "INFRA": ["Docker (from scratch)", "Git (from scratch)", "Node.js"]
+    },
+    "history": [
+        {
+            "period": "2026-PRESENT",
+            "title": "Full-Stack Portfolio System",
+            "desc": "Architecting a modular pre-compiled SSG pipeline using Python and Node.js."
+        },
+        {
+            "period": "2025-2026",
+            "title": "GDSC JKUAT - Executive Member",
+            "desc": "Leading blockchain initiatives and technical workshops for 500+ students."
+        }
+    ]
+}
