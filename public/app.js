@@ -171,4 +171,20 @@ function executeCmd(cmdName) {
     }
 }
 
+async function updateTelemetry() {
+    const footer = document.querySelector('footer');
+    const projectCount = systemState.projects.length;
+    const postCount = systemState.posts.length;
+    
+    // Aesthetic: Simulated memory usage and real-time project count
+    footer.innerHTML = `
+        SESSION_ID: <span id="session-id">${document.getElementById('session-id').innerText}</span> | 
+        OBJ_COUNT: ${projectCount + postCount} | 
+        STATUS: STABLE | 
+        UPTIME: ${Math.floor(performance.now() / 1000)}s
+    `;
+}
+// Run telemetry every second
+setInterval(updateTelemetry, 1000);
+
 boot();
