@@ -18,7 +18,7 @@ async function boot() {
         console.log("[SHELL] System state loaded successfully.");
         
         // Default entry view: The Sleek About Page
-        renderAbout();
+        renderHome();
         
         // Initialize Telemetry ONLY after data and DOM are ready
         const sessionId = Math.random().toString(16).substr(2, 8).toUpperCase();
@@ -42,6 +42,75 @@ async function boot() {
     }
 }
 
+/**
+ * VIEW: Home Module (The Command Center)
+ * High-signal identity for Systems/Backend roles.
+ */
+function renderHome() {
+    const main = document.getElementById('view-port');
+    if (!main || !isSystemReady) return;
+
+    const id = systemState.identity;
+    const featured = systemState.projects[0] || { title: "C-Docker", lang: "C" };
+
+    main.innerHTML = `
+        <div class="home-container">
+            <section class="hero-block">
+                <div class="identity-header">
+                    <h1 class="glitch">PETER_NDUATI</h1>
+                    <p class="hero-subtitle">Systems Architect specializing in high-performance backends and blockchain infrastructure.</p>
+                </div>
+                
+                <div class="hero-value-prop">
+                    <p>"Building low-latency distributed systems and exploring the mechanics of the Ethereum mempool".</p>
+                </div>
+
+                <div class="power-stack">
+                    <span class="power-tag">C (Systems)</span>
+                    <span class="power-tag">GO (Concurrency)</span>
+                    <span class="power-tag">NODE.JS (Runtime)</span>
+                    <span class="power-tag">DSA</span>
+                </div>
+            </section>
+
+            <div class="home-grid">
+                <div class="architecture-preview">
+                    <h2 class="section-tag">// FEATURED_ARCHITECTURE</h2>
+                    <div class="arch-card">
+                        <div class="arch-meta">
+                            <h3>${featured.title} [${featured.lang}]</h3>
+                            <div class="stat-badges">
+                                <span class="badge">LATENCY: <1ms</span>
+                                <span class="badge">IO: ASYNC</span>
+                            </div>
+                        </div>
+                        <p class="hook-text"><strong>The Hardest Problem:</strong> Solving race conditions in custom task schedulers to ensure zero-fragmentation during high-throughput I/O.</p>
+                        <button onclick="renderProjects()" class="btn-ghost">EXAMINE_ALL_BINARIES</button>
+                    </div>
+                </div>
+
+                <div class="philosophy-aside">
+                    <h2 class="section-tag">// PHILOSOPHY_LOG</h2>
+                    <ul class="phil-list">
+                        <li>
+                            <strong>Performance over Fluff</strong>
+                            <p>"I value memory safety and zero-cost abstractions."</p>
+                        </li>
+                        <li>
+                            <strong>Self-Reliance</strong>
+                            <p>"Building from scratch to understand the internals of Git, Docker, and Kernels".</p>
+                        </li>
+                        <li>
+                            <strong>Deep Work Footprint</strong>
+                            <p>Active contributor to <strong>txpool-viz</strong> and the Ethereum MEV ecosystem.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    `;
+    main.scrollTop = 0;
+}
 /**
  * VIEW: About / CV Module
  * Optimized for JKUAT (2023-2027) profile.
@@ -183,11 +252,13 @@ function renderPost(slug) {
 /**
  * INTERFACE: Command Palette Logic
  */
+
 const commands = [
-    { cmd: 'ls /bin', action: renderProjects, desc: 'List project executables' },
-    { cmd: 'ls /var/log', action: renderBlog, desc: 'List system logs' },
-    { cmd: 'man peter', action: renderAbout, desc: 'Open user manual (CV)' },
-    { cmd: 'cd ~', action: renderAbout, desc: 'Return to home' }
+    { cmd: 'ls /bin', action: renderProjects, desc: 'List all project executables' },
+    { cmd: 'ls /var/log', action: renderBlog, desc: 'List all system logs' },
+    { cmd: 'man peter', action: renderAbout, desc: 'Open user manual (Deep CV)' },
+    { cmd: 'ls about', action: renderAbout, desc: 'Alias for man peter' }, // New navigation path
+    { cmd: 'cd ~', action: renderHome, desc: 'Return to system root (Home)' }
 ];
 
 window.addEventListener('keydown', (e) => {
