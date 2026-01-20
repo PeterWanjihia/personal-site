@@ -85,4 +85,90 @@ function renderProjects() {
     `).join('');
 }
 
+// Module: View Router - Man Page (About)
+function renderAbout() {
+    const main = document.getElementById('view-port');
+    main.innerHTML = `
+        <div class="man-page">
+            <div class="man-header">PETER(1) &nbsp;&nbsp;&nbsp;&nbsp; User Manual &nbsp;&nbsp;&nbsp;&nbsp; PETER(1)</div>
+            
+            <h3>NAME</h3>
+            <p><strong>Peter</strong> -- Systems Developer, Blockchain Architect, and Computer Science Undergraduate at JKUAT.</p>
+
+            <h3>SYNOPSIS</h3>
+            <p><strong>peter</strong> [--focus blockchain] [--focus systems-dev] [--age 24]</p>
+
+            <h3>DESCRIPTION</h3>
+            <p>As a CS student at Jomo Kenyatta University of Agriculture and Technology, Peter focuses on building high-performance systems from first principles. Currently serving as a GDSC executive with a blockchain focus.</p>
+            
+            <h3>SKILLS</h3>
+            <ul>
+                <li><strong>Languages:</strong> C, C++, Python, JavaScript (Node.js)</li>
+                <li><strong>Domains:</strong> DeFi Automation, MEV, Kernel Architecture, AI Agents</li>
+                <li><strong>Interests:</strong> Stoicism, Austrian Economics, Guitar</li>
+            </ul>
+
+            <h3>SEE ALSO</h3>
+            <p><a href="#" onclick="renderProjects()">projects(1)</a>, <a href="#" onclick="renderBlog()">blog(1)</a></p>
+            
+            <div class="man-footer">PETER 1.0.0 &nbsp;&nbsp;&nbsp;&nbsp; 2026-01-19</div>
+        </div>
+    `;
+}
+
+// Add this to your global state
+const commands = [
+    { cmd: 'ls /bin', action: renderProjects, desc: 'List all project executables' },
+    { cmd: 'ls /var/log', action: renderBlog, desc: 'List all system logs' },
+    { cmd: 'man peter', action: renderAbout, desc: 'Open user manual' },
+    { cmd: 'cd ~', action: renderHome, desc: 'Return to home directory' }
+];
+
+// Global Keyboard Listener for 'Ctrl + K'
+window.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.key === 'k') {
+        e.preventDefault();
+        toggleCommandPalette();
+    }
+});
+
+function toggleCommandPalette() {
+    let palette = document.getElementById('palette');
+    if (!palette) {
+        palette = document.createElement('div');
+        palette.id = 'palette';
+        palette.innerHTML = `
+            <div class="palette-inner">
+                <input type="text" id="cmd-input" placeholder="Type a command (e.g., ls /bin)..." autocomplete="off">
+                <div id="cmd-results"></div>
+            </div>
+        `;
+        document.body.appendChild(palette);
+    }
+    palette.style.display = palette.style.display === 'flex' ? 'none' : 'flex';
+    if (palette.style.display === 'flex') document.getElementById('cmd-input').focus();
+}
+
+// Logic to execute commands (Simplified)
+document.addEventListener('input', (e) => {
+    if (e.target.id === 'cmd-input') {
+        const val = e.target.value.toLowerCase();
+        const results = commands.filter(c => c.cmd.includes(val));
+        document.getElementById('cmd-results').innerHTML = results.map(r => `
+            <div class="cmd-item" onclick="executeCmd('${r.cmd}')">
+                <strong>${r.cmd}</strong> - ${r.desc}
+            </div>
+        `).join('');
+    }
+});
+
+function executeCmd(cmdName) {
+    const command = commands.find(c => c.cmd === cmdName);
+    if (command) {
+        command.action();
+        toggleCommandPalette();
+        document.getElementById('cmd-input').value = '';
+    }
+}
+
 boot();
